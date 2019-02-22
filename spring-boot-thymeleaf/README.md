@@ -1,4 +1,4 @@
-# Thymeleaf介绍
+# Spring Boot整合Thymeleaf
 
 Thymeleaf 是一个跟 Velocity、FreeMarker 类似的模板引擎，它可以完全替代 JSP 。也就是说JSP中的特性在Thymeleaf几乎都有对应的支持。Thymeleaf支持HTML原型，通过Thymeleaf特殊的标签可以基本实现JSP中动态数据的展示效果。
 
