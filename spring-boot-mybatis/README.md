@@ -4,6 +4,8 @@
 
 我也觉得Mybatis这种用XML的方式学习成本更低一些吧，但是熟悉JPA能很大程度简化项目开发。
 
+之前已经用Spring Boot整合Thymeleaf、Mybatis实现了基础的CRUD，并且前端使用Vue.js开发，这里先送上仓库地址：[传送门](https://github.com/TyCoding/spring-boot)
+
 # 准备
 
 ## 引入依赖
