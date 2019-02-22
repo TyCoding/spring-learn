@@ -1,0 +1,32 @@
+<h1>Index</h1>
+<hr/>
+`${...}`表达式：<b th:text="${demo}"></b><br/>
+`*{...}`表达式：
+<b th:object="${user}">
+    <span th:text="*{username}"></span>
+    <span th:text="*{password}"></span>
+</b>
+错误实例：<span th:text="*{username}"></span>
+另一种获取方式：<span th:text="${user.username}"></span><br/>
+
+<b>字符串拼接</b>
+<span th:text="'hello ' + ${user.username} + '!'"></span>
+简洁用法：<span th:text="|hello ${user.username}!|"></span><br/>
+
+<b>if/unless条件判断</b>
+<span th:if="${user.username == 'tycoding'}">tycoding</span>
+<span th:unless="${user.username == 'admin'}">tycoding</span><br/>
+
+<b>for循环</b>
+<ol th:each="item,property : ${list}">
+    <li th:text="${property.index}"></li>
+    <li th:text="${item}"></li>
+</ol>
+<br/>
+<br/>
+
+<b>内联JS</b>
+<script th:inline="javascript">
+    var username = [[${user.username}]];
+    console.log(username);
+</script>
