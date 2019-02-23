@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="cn.tycoding.utils.MyMapper"/>
+        </plugin>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/springboot_thymeleaf_mybatis"
+                        userId="root"
+                        password="root">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 生成的entity -->
+        <javaModelGenerator targetPackage="cn.tycoding.entity" targetProject="spring-boot-thymeleaf-mybatis/src/main/java"/>
+
+        <!-- 生成的Mapper XML-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="spring-boot-thymeleaf-mybatis/src/main/resources"/>
+
+        <!-- 生成的Mapper映射类 -->
+        <javaClientGenerator targetPackage="cn.tycoding.mapper" targetProject="spring-boot-thymeleaf-mybatis/src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="user_role"></table>
+    </context>
+</generatorConfiguration>
