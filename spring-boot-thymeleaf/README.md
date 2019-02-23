@@ -2,6 +2,10 @@
 
 Thymeleaf 是一个跟 Velocity、FreeMarker 类似的模板引擎，它可以完全替代 JSP 。也就是说JSP中的特性在Thymeleaf几乎都有对应的支持。Thymeleaf支持HTML原型，通过Thymeleaf特殊的标签可以基本实现JSP中动态数据的展示效果。
 
+**写在前面**
+
+如果你看过我仓库中的web项目应该会发现，基本前端都是完全依赖Vue.js+ElementUI，这和Jquery有很大区别，通常来讲使用Vue.js就应该用Vue的组件(.vue文件)开发，而在HTML页面直接引入Vue.js就要舍弃很多Vue的特性。而在今天学习的Thymeleaf中若使用了`<iframe>`布局就完全不能使用Vue.js了。
+
 ## 配置
 
 > 使用Thymeleaf受限要引入其依赖
