@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tycoding.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="cn.tycoding.entity.User">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="cn.tycoding.entity.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+    </resultMap>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        select u.id, u.username, u.password, u.age
+        from user u
+        where 1=1
+        <if test="username != null and username != ''">
+            and username = #{username}
+        </if>
+        <if test="age != null and age != ''">
+            and age = #{age}
+        </if>
+        order by u.id
+    </select>
+
+    <select id="findById" resultType="cn.tycoding.entity.UserWithRole">
+        select u.id, u.username, u.password, u.age, ur.role_id roleId
+        from user u
+               left join user_role ur on (u.id = ur.user_id)
+        where u.id = #{id}
+    </select>
+
 </mapper>
