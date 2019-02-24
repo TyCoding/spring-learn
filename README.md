@@ -36,4 +36,6 @@
 
 * [spring-boot-thymeleaf-mybatis](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-thymeleaf-mybatis): Spring Boot引入Mybatis通用Mapper(`tk.mapper`)、Thymeleaf，配合Vue.js和ElementUI入门CRUD示例
 
+* [spring-boot-shiro](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-shiro): Spring Boot整合Shiro，实现基本的身份校验
+
 * 正在完善...
