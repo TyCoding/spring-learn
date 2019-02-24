@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    name: springboot
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #mysql驱动
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #基本属性
+      url: jdbc:mysql://127.0.0.1:3306/springboot_shiro?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: root
+
+  #devtools插件
+  devtools:
+    livereload:
+      enabled: true #是否支持livereload
+      port: 35729
+    restart:
+      enabled: true #是否支持热部署
+
+  #thymeleaf模板引擎
+  thymeleaf:
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    cache: false
+
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: cn.tycoding.entity
+  configuration:
+    # 开启驼峰命名转换，如：Table(create_time) -> Entity(createTime)。不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
+    map-underscore-to-camel-case: true
+
+# 打印sql
+logging:
+  level:
+    cn.tycoding.mapper: DEBUG
