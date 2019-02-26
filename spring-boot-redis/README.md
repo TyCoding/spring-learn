@@ -2,6 +2,12 @@
 
 万能的`spring-boot`也对nosql数据库进行了封装，比如这里要讲的`spring-boot-redis`。
 
+**致谢**
+
+* [mrbird](https://github.com/wuyouzhuguli/)
+
+* [纯洁的微笑](http://www.ityouknow.com/)
+
 # 起步
 
 首先我们需要在本地或者自己的服务器上安装Redis程序，基础教程我推荐阅读我的这篇文章：
