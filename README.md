@@ -42,6 +42,8 @@
 
 * [spring-boot-mail](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-mail): Spring Boot整合Mail邮件服务，实现基本的邮件发送。
 
+* [spring-boot-swagger](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-swagger): Spring Boot整合Swagger2.9.2
+
 * 正在完善...
 
 ## 致谢
