@@ -40,6 +40,8 @@
 
 * [spring-boot-redis](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-redis): Spring Boot整合Redis，封装常用的Redis Shell命令，在前端实现基础的Redis监控（内存、Keys数量监控；Redis信息、实现Redis简易终端）
 
+* [spring-boot-mail](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-mail): Spring Boot整合Mail邮件服务，实现基本的邮件发送。
+
 * 正在完善...
 
 ## 致谢
