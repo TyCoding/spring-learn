@@ -1,0 +1,19 @@
+spring:
+  mail:
+    #邮件服务器地址
+    host: smtp.163.com
+    #用户名
+    username: tycoding_tumo@163.com
+    #密码
+    password: 客户端授权密码
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp.auth: true
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+
+#发件人邮箱
+mail.from: tycoding_tumo@163.com
