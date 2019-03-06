@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/element-ui/lib/theme-chalk/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+<div id="app">
+    <!-- search -->
+    <div style="margin-top: 50px;">
+        <el-row :gutter="20">
+            <el-col :span="6" :offset="8">
+                <el-input placeholder="请输入内容" type="text" class="input-with-select" @keyup.enter.native="search" v-model="searchMap.keyword">
+                    <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+                </el-input>
+            </el-col>
+        </el-row>
+    </div>
+
+    <!-- main -->
+    <div id="main">
+        <el-card>
+            <span v-if="list == null || list === []" style="margin:0 42%;color:red">Message:&nbsp;&nbsp;{{msg}}</span>
+            <!-- 列表 -->
+            <el-table v-else ref="table" :data="list" stripe size="mini" border tooltip-effect="dark" style="width: 100%">
+                <el-table-column prop="username" label="用户名" width="200" align="center">
+                    <template slot-scope="scope">
+                        <b v-if="scope.row.username != null && scope.row.username != '' && scope.row.username != 'null'" v-html="scope.row.username"></b>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="email" label="邮箱" align="center">
+                    <template slot-scope="scope">
+                        <b v-if="scope.row.email != null && scope.row.email != '' && scope.row.email != 'null'" v-html="scope.row.email"></b>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="qq" label="QQ号" align="center">
+                    <template slot-scope="scope">
+                        <b v-if="scope.row.qq != null && scope.row.qq != '' && scope.row.qq != 'null'" v-html="scope.row.qq"></b>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="password" label="密码" align="center">
+                    <template slot-scope="scope">
+                        <b v-if="scope.row.password != null && scope.row.password != '' && scope.row.password != 'null'" v-html="scope.row.password"></b>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-card>
+    </div>
+
+    <!-- paging -->
+    <el-row :gutter="10">
+        <el-col :span="10" :offset="2">
+            <div class="pagination">
+                <el-pagination
+                        background
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="pageConf.current"
+                        :page-sizes="pageConf.pageOption"
+                        :page-size="pageConf.rows"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="pageConf.total">
+                </el-pagination>
+            </div>
+        </el-col>
+    </el-row>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+</body>
+<script type="text/javascript" th:src="@{/vue/vue.js}"></script>
+<script type="text/javascript" th:src="@{/element-ui/lib/index.js}"></script>
+<script type="text/javascript" th:src="@{/vue/vue-resource.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</html>
