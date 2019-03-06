@@ -1,5 +1,7 @@
 # 整理学习spring boot常见案例
 
+**欢迎star,fork给作者一些鼓励**
+
 ## 项目基础环境
 
 ### 后端
@@ -43,6 +45,8 @@
 * [spring-boot-mail](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-mail): Spring Boot整合Mail邮件服务，实现基本的邮件发送。
 
 * [spring-boot-swagger](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-swagger): Spring Boot整合Swagger2.9.2
+
+* [spring-boot-solr](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-solr): Spring Boot整合Solr-7.7.1，配置IK分词器实现分页、高亮查询。
 
 * 正在完善...
 
