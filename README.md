@@ -48,6 +48,8 @@
 
 * [spring-boot-solr](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-solr): Spring Boot整合Solr-7.7.1，配置IK分词器实现分页、高亮查询。
 
+* [spring-boot-mongodb](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-mongodb): Spring Boot整合Spring-data-mongodb，实现对MongoDB数据库的增删改查
+
 * 正在完善...
 
 ## 致谢
