@@ -172,7 +172,11 @@ grunt server
 
 > 去Github下载最新版elasticsearch-ik
 
-[https://github.com/medcl/elasticsearch-analysis-ik/releases](git clone https://github.com/medcl/elasticsearch-analysis-ik/releases)
+[https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)
+
+```
+git clone https://github.com/medcl/elasticsearch-analysis-ik/releases
+```
 
 > 解压文件，并将文件夹重命名为`ik`
 
@@ -443,6 +447,92 @@ docker pull elasticsearch:6.6.2
 [root@localhost ~]# sysctl -w vm.max_map_count=262144
 vm.max_map_count = 262144
 ```
+
+## Docker容器中ES服务配置IK分词器
+
+> 首先Docker elasticsearch，查看安装目录
+
+```
+[root@localhost ~]# docker exec -it vm_es /bin/bash
+[root@bcf04318cdab elasticsearch]# cd ..
+[root@bcf04318cdab share]# cd ..
+[root@bcf04318cdab usr]# 
+```
+
+可以看到`elasticsearch`在Docker中的安装目录为：`/usr/share/elasticsearch`。
+**注意**直接在宿主机上访问这个地址是不存在的，这个地址是在Docker虚拟路径下的。
+
+```
+[root@localhost ~]# cd /usr/share/elasticsearch
+-bash: cd: /usr/share/elasticsearch: 没有那个文件或目录
+```
+
+> 复制本地的`ik`文件夹到远程宿主机上
+
+发送文档到虚拟机上有很多方式，这里使用`scp`命令
+
+```
+scp /develop/software/elasticsearch/plugins/ik root@192.168.160.128:/root/
+```
+
+> 用Docker命令将宿主机上的文件拷贝到Docker-es容器中
+
+```
+[root@localhost ~]# cd /root
+[root@localhost ~]# ls
+anaconda-ks.cfg  ik
+[root@localhost ~]# docker cp ik vm_es:/usr/share/elasticsearch
+```
+
+> 重启ES容器
+
+```
+docker restart vm_es
+```
+
+执行这个重启命令，通过`docker ps`命令发现，ES服务启动一会就又关闭了，
+
+![](doc/16.png)
+
+执行`docker logs vm_es`查看`vm_es`容器的日志：
+
+![](doc/17.png)
+
+此时，心里真TM一万个草泥马在奔腾。只好`docker rm vm_es`删除镜像，重新创建。
+
+```
+[root@localhost ~]# docker run -di --name=vm_es -p 9200:9200 -p 9300:9300 elasticsearch:6.6.2
+```
+
+进入到`vm_es`容器内：
+
+```
+[root@3e01ce5eb235 elasticsearch]# cd plugins 
+[root@3e01ce5eb235 plugins]# ls -la 
+total 0
+drwxr-xr-x. 4 elasticsearch root  51 Mar  6 15:19 .
+drwxrwxr-x. 1 elasticsearch root  44 Mar  6 15:20 ..
+drwxr-xr-x. 2 elasticsearch root 264 Mar  6 15:19 ingest-geoip
+drwxr-xr-x. 2 elasticsearch root 114 Mar  6 15:19 ingest-user-agent
+```
+
+此时看到`vm_es`内部文件夹的访问权限如上，但是查看自己上传的`ik`文件夹的权限：
+
+```
+[root@localhost ~]# ls -la
+drwx------.  3 root root  243 3月  20 09:44 ik
+```
+
+明显发现权限不对，于是修改`ik`文件夹的访问权限：
+
+```
+[root@localhost ~]# chmod a+x+r ik
+[root@localhost ~]# ls -la
+drwx--x--x.  3 root root  243 3月  20 09:44 ik
+```
+
+然后再拷贝到Docker内ES容器`plugins`目录下，重启ES，启动成功。
+
 
 # 连接远程ElasticSearch服务
 
