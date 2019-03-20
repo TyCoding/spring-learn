@@ -2,7 +2,7 @@ package cn.tycoding.service.impl;
 
 import cn.tycoding.entity.Comments;
 import cn.tycoding.service.MongoService;
-import cn.tycoding.service.dao.MongoDao;
+import cn.tycoding.dao.MongoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package cn.tycoding.service.dao;
+package cn.tycoding.dao;
 
 
 import cn.tycoding.entity.Comments;
