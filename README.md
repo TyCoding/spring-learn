@@ -50,10 +50,6 @@
 
 * [spring-boot-mongodb](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-mongodb): Spring Boot整合Spring-data-mongodb，实现对MongoDB数据库的增删改查
 
+* [spring-boot-elasticsearch](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-elasticsearch): Spring Boot整合Spring-data-elasticsearch，实现对elasticsearch的，添加、查询功能
+
 * 正在完善...
-
-## 致谢
-
-* [纯洁的微笑](http://www.ityouknow.com/)
-
-* [慕课网](https://www.imooc.com/)
