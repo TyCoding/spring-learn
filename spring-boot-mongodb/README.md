@@ -159,7 +159,7 @@ public class Comments implements Serializable {
 Spring Data MongoDB提供了一个接口：`MongoRepository`，这和Spring Data JPA的`JpaRepository`、Spring Data Redis的`RedisRepository`很像，封装的方法都类似：
 
 ```java
-public interface MongoDao extends MongoRepository<Comments, String> {
+public interface MongoDbRepository extends MongoRepository<Comments, String> {
 }
 ```
 
@@ -170,33 +170,33 @@ public interface MongoDao extends MongoRepository<Comments, String> {
 public class MongoServiceImpl implements MongoService {
 
     @Autowired
-    private MongoDao mongoDao;
+    private MongoDbRepository mongoDbRepository;
 
     @Override
     public List<Comments> findAll() {
-        return mongoDao.findAll();
+        return mongoDbRepository.findAll();
     }
 
     @Override
     public Comments findById(Long id) {
-        return mongoDao.findById(id.toString()).get();
+        return mongoDbRepository.findById(id.toString()).get();
     }
 
     @Override
     public void add(Comments comments) {
         comments.set_id(new Random().nextLong());
-        mongoDao.save(comments);
+        mongoDbRepository.save(comments);
     }
 
     @Override
     public void update(Comments comments) {
-        mongoDao.save(comments);
+        mongoDbRepository.save(comments);
     }
 
     @Override
     public void delete(List<Long> ids) {
         ids.forEach(id -> {
-            mongoDao.deleteById(id.toString());
+            mongoDbRepository.deleteById(id.toString());
         });
     }
 }
