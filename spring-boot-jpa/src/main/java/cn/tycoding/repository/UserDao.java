@@ -1,4 +1,4 @@
-package cn.tycoding.dao;
+package cn.tycoding.repository;
 
 import cn.tycoding.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
