@@ -21,7 +21,7 @@
 
 ![](doc/1.png)
 
-### 启动
+## 启动
 
 在命令行中进入ElasticSearch安装目录的`bin`文件夹下，执行命令：
 
@@ -35,7 +35,7 @@
 
 ![](doc/3.png)
 
-# 命令
+## 命令
 
 > 新建索引
 
@@ -164,9 +164,11 @@ http.cors.allow-origin: "*"
 grunt server
 ```
 
+浏览器访问：`localhost:9100`
+
 ![](doc/9.png)
 
-# 安装IK分词器
+## 安装IK分词器
 
 和Solr一样，ElasticSearch也需要安装IK分析器以实现对中文更好的分词支持。
 
@@ -190,7 +192,7 @@ git clone https://github.com/medcl/elasticsearch-analysis-ik/releases
 
 ![](doc/11.png)
 
-## 扩展词典
+### 扩展词典
 
 在`elasticsearch/plugins/ik/config`下新建`my.dic`文件，在`my.dic`中写入想要分词识别的文字；修改`IKAnalyzer.cfg.xml`文件，在`<entry key="ext_dict">`中指定`my.dic`。
 
@@ -439,7 +441,7 @@ docker pull elasticsearch:6.6.2
 
 ## 注意
 
-如果访问这个地址一直显示连接不上，并且`docker ps`查看我们刚创建的`vm_es`容器并没有启动，很可能是Linux默认虚拟内存太小了，可以尝试修改：
+如果访问这个地址一直显示连接不上，并且`docker ps`查看我们刚创建的`vm_es`容器并没有启动，很可能是Linux默认分配的虚拟内存太小了，可以尝试修改：
 
 ```
 [root@localhost ~]# cat /proc/sys/vm/max_map_count
@@ -481,7 +483,7 @@ scp /develop/software/elasticsearch/plugins/ik root@192.168.160.128:/root/
 [root@localhost ~]# cd /root
 [root@localhost ~]# ls
 anaconda-ks.cfg  ik
-[root@localhost ~]# docker cp ik vm_es:/usr/share/elasticsearch
+[root@localhost ~]# docker cp ik vm_es:/usr/share/elasticsearch/plugins
 ```
 
 > 重启ES容器
@@ -532,6 +534,53 @@ drwx--x--x.  3 root root  243 3月  20 09:44 ik
 ```
 
 然后再拷贝到Docker内ES容器`plugins`目录下，重启ES，启动成功。
+
+```
+[root@localhost ~]# docker cp ik vm_es:/usr/share/elasticsearch/plugins
+```
+
+## Docker容器中ES服务配置HEAD插件
+
+在本地配置HEAD插件，是直接在`HEAD`官网下载，然后启动HEAD内置的服务器，直接在页面访问：`localhost:9100`即可，而在Docker中，提供了HEAD的镜像，我们只需要pull下来即可：
+
+```
+docker pull mobz/elasticsearch-head:5
+```
+
+> 运行容器
+
+```
+docker run -di --name=vm_es_head -p 9100:9100 mobz/elasticsearch-head:5
+```
+
+**注意** 如果运行容器时遇到如下错误，尝试重启Docker服务
+
+```
+iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 5000 -j DNAT --to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain/target/match by that name. (exit status 1)
+```
+
+```
+systemctl restart docker
+```
+
+> 运行ES容器，并进入容器内部修改`elasticsearch.yml`允许跨域访问
+
+```
+[root@localhost ~]# docker start vm_es
+[root@localhost ~]# docker exec -it vm_es /bin/bash
+[root@3e01ce5eb235 elasticsearch]# cd config
+[root@3e01ce5eb235 config]# vi elasticsearch.yml
+
+# 添加如下：
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+```
+
+> 重启ES容器
+
+![](doc/18.png)
+
+![](doc/19.png)
 
 
 # 连接远程ElasticSearch服务
