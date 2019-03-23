@@ -20,7 +20,7 @@ MongoDB是一个跨平台的面向文档的数据库，他介于关系型数据�
 
 请查看这篇教程：
 
-![](doc/install/install.md)
+[MongoDB安装教程](doc/install/install.md)
 
 上面的教程中讲解了在本地电脑安装Mongodb数据库，并且在远程服务器Docker环境下安装了Mongodb。下面我们总结几个常用命令:
 
