@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-mail</artifactId>
+    <artifactId>boot-mail</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-mail</name>
+    <name>boot-mail</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
