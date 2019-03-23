@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cn.tycoding</groupId>
-	<artifactId>spring-boot-mongodb</artifactId>
+	<artifactId>boot-mongodb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-mongodb</name>
+	<name>boot-mongodb</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
