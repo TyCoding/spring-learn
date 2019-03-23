@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-redis</artifactId>
+    <artifactId>boot-redis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-redis</name>
+    <name>boot-redis</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
