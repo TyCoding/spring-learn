@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-swagger</artifactId>
+    <artifactId>boot-swagger</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-swagger</name>
+    <name>boot-swagger</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
