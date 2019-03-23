@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-jpa</artifactId>
+    <artifactId>boot-jpa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-jpa</name>
+    <name>boot-jpa</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
