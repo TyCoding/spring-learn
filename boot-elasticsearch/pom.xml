@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-elasticsearch</artifactId>
+    <artifactId>boot-elasticsearch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-elasticsearch</name>
+    <name>boot-elasticsearch</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
