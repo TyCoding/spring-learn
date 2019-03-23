@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("cn.tycoding.mapper")
-public class SpringBootMybatisApplication {
+public class BootMybatisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootMybatisApplication.class, args);
+        SpringApplication.run(BootMybatisApplication.class, args);
     }
 
 }
