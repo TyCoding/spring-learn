@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-solr</artifactId>
+    <artifactId>boot-solr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-solr</name>
+    <name>boot-solr</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
