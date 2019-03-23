@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-thymeleaf</artifactId>
+    <artifactId>boot-thymeleaf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-thymeleaf</name>
+    <name>boot-thymeleaf</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
