@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBootThymeleafMybatisApplicationTests {
+public class BootThymeleafMybatisApplicationTests {
 
     @Test
     public void contextLoads() {

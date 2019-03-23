@@ -6,10 +6,10 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("cn.tycoding.mapper")
-public class SpringBootThymeleafMybatisApplication {
+public class BootThymeleafMybatisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootThymeleafMybatisApplication.class, args);
+        SpringApplication.run(BootThymeleafMybatisApplication.class, args);
     }
 
 }
