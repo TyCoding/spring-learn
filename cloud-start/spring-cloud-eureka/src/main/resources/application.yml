@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    # 应用名称
+    name: eureka-server
+eureka:
+  client:
+    # 是否注册自己到Eureka Server
+    register-with-eureka: false
+    # 是否拉取其他的服务的信息，单个节点不需要拉取其他Eureka节点信息
+    fetch-registry: false
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
