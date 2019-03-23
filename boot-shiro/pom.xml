@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.tycoding</groupId>
-    <artifactId>spring-boot-shiro</artifactId>
+    <artifactId>boot-shiro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-shiro</name>
+    <name>boot-shiro</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

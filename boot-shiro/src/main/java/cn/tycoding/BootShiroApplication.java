@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("cn.tycoding.mapper")
-public class SpringBootShiroApplication {
+public class BootShiroApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootShiroApplication.class, args);
+        SpringApplication.run(BootShiroApplication.class, args);
     }
 
 }
