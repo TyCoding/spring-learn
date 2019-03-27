@@ -8,8 +8,10 @@ eureka:
   client:
     # Eureka Server地址
     service-url:
-      defaultZone: http://127.0.0.1:8080/eureka/
+      defaultZone: http://127.0.0.1:8080/eureka/,http://127.0.0.1:8081/eureka/
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
     instance-id: 127.0.0.1:${server.port}
+    lease-expiration-duration-in-seconds: 10 # 每隔10秒过期
+    lease-renewal-interval-in-seconds: 5 # 5秒一次请求

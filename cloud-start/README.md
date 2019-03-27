@@ -1,3 +1,310 @@
+# 初识Spring Cloud
+
+面对越来越复杂的业务，我们逐步尝试优化项目的设计，比如分层开发、抽取公共部分、封装继承。。。 以至于现在我们逐步将项目模块化，将公共模块抽取出来。比如**短信服务**这个模块，他可能被用户中心模块、后台管理模块、认证中心模块等调用，若在这些模块中都实现一遍短信服务未免太麻烦，于是我们开始将项目抽取出来：
+
+![](doc/ab.jpg)
+
+那么这是一个最基础的架构设计，A服务调用B服务。而这存在一些问题：
+
+* 不利于扩展
+* 模块过多造成模块间关系错中复杂，不利于维护
+
+为了解决这些问题，出现类似dubbo、zookeeper等分布式框架，通过一个**服务中心**来协调处理各个模块之间的关系：
+
+![](doc/4.png)
+
+那么Spring Cloud就将这些常用的技术整合在一起，其中就提供了**注册中心 Eureka**。通过Eureka Server可以来监控各个微服务是否正常运行。
+其中涉及三个角色：
+
+* Eureka Server: 提供服务注册与发现。
+* Service Provider: 服务提供方。将自身注册到Eureka，供消费者找到
+* Service Consumer: 服务消费方。从Eureka中获取服务提供方列表，从而消费服务。
+
+**扩展**
+
+Spring Cloud版本的命名是以A到Z为首字母的一些单词组成：
+
+| Release Train | Boot Version |
+| --- | --- |
+| Greenwich | 2.1.x |
+| Finchley | 2.0.x |
+| Edgware | 1.5.x |
+| Dalston | 1.5.x |
+
+# 起步
+
+## Eureka Server
+
+创建`spring-cloud-consumer`模块
+
+> 1.引入依赖
+
+```xml
+<properties>
+    <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+</properties>
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+</dependencies>
+
+<!-- Spring Cloud -->
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+> 2.启动器类
+
+```java
+@SpringBootApplication
+@EnableEurekaServer
+public class SpringCloudEurekaApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringCloudEurekaApplication.class, args);
+    }
+}
+```
+
+如上需要在启动器类上添加`@EnableEurekaServer`注解，他会标识该服务为Eureka Server.
+
+> 3.修改配置文件
+
+```yaml
+server:
+  port: 8080
+spring:
+  application:
+    # 应用名称
+    name: eureka-server
+eureka:
+  client:
+    # 是否注册自己到Eureka Server
+    register-with-eureka: false
+    # 是否拉取其他的服务的信息，单个节点不需要拉取其他Eureka节点信息
+    fetch-registry: false
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+```
+
+* `spring.application.name`: 标识当前微服务的名称，可以在Eureka Server管理页面看到
+* `eureka.client.register-with-eureka`: 是否将自己注册到Eureka Server。默认为true
+* `eureka.fetch-registry`: 是否拉取其他Eureka Server信息，比如配置的集群。默认为true
+* `enreka.service-url`: 自定义与Eureka Service交互的地址
+* `${server.port}`: Spring提供Spring EL表达式，可以方便的获取配置文件数据
+
+## Producer Server
+
+创建`spring-cloud-producer`模块
+
+> 1.引入依赖
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+</dependencies>
+
+<!-- Spring Cloud -->
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+> 2.启动器类
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class SpringCloudProducerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringCloudProducerApplication.class, args);
+    }
+}
+```
+
+> 3.创建`PriducerController`
+
+```java
+@RestController
+public class ProducerController {
+
+    @GetMapping("/producer/{name}")
+    public String hello(@PathVariable("name") String name) {
+        return "Hello " + name + " , this is producer message!";
+    }
+}
+```
+
+如上，`Producer Server`暴露一个Rest接口，Spring Cloud通过`@EnableDiscoverClient`识别该模块为服务提供者，对外提供服务，Spring Cloud将该服务注册到`Eureka`中，供服务消费者调用。
+
+> 4.修改配置文件
+
+```yaml
+server:
+  port: 9000
+spring:
+  application:
+    name: spring-cloud-producer
+
+eureka:
+  client:
+    # EurekaServer地址
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+``` 
+
+* `eureka.client.service-url.defaultZone`: EurekaServer地址
+
+## Consumer Server
+
+> 1.引入依赖
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+</dependencies>
+
+<!-- Spring Cloud -->
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+> 2.启动器类
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class SpringCloudConsumerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringCloudConsumerApplication.class, args);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+```
+
+> 3.创建ConsumerController
+
+`Producer Service`将服务的Rest接口注册到注册中心Eureka Server，`Consumer Service`从注册中心获取想要调用的`Produce Service`接口。所以`Consumer Service`将要消费`Produce`生产的数据，并最终将封装好的数据通过一个Rest接口供前端调用。
+
+所以创建Web层的映射接口：`ConsumerController.java`:
+
+```java
+@RestController
+public class ConsumerController {
+
+    @Autowired
+    private ConsumerService consumerService;
+
+    @GetMapping("/consumer/{name}")
+    public String hello(@PathVariable("name") String name) {
+        return consumerService.hello(name);
+    }
+}
+```
+
+> 4.创建ConsumerService
+
+`ConsumerController`作为Web层映射接口，当然需要调用Service服务层，主要通过Consumer的Service方法从注册中心获取数据并进行业务处理，最后再交由Controller发送给前端：
+
+```java
+@Service
+public class ConsumerService {
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    public String hello(String name) {
+        //根据服务名称获取服务实例
+        List<ServiceInstance> instances = discoveryClient.getInstances("spring-cloud-producer");
+        //因为只有一个实例，所以直接获取
+        ServiceInstance instance = instances.get(0);
+        String baseUrl = "http://" + instance.getHost() + ":" + instance.getPort() + "/producer/";
+        String response = restTemplate.getForObject(baseUrl + name, String.class);
+        return response;
+    }
+}
+```
+
+* `RestTemplate`: Spring提供的一个类，其中封装了很多HTTP请求方法，可以方便的进行HTTP请求。
+* `DiscoverClient`: 回想启动器类的`@EnableDiscoverClient`注解，他是Eureka客户端实例，可以从其中获取注册中心Eureka的注册信息。
+
+> 5.修改配置文件
+
+```yaml
+server:
+  port: 8080
+spring:
+  application:
+    # 应用名称
+    name: eureka-server
+eureka:
+  client:
+    # 是否注册自己到Eureka Server
+    register-with-eureka: false
+    # 是否拉取其他的服务的信息，单个节点不需要拉取其他Eureka节点信息
+    fetch-registry: false
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+```
+
+## 测试
+
+按照顺序依次启动：1.`EurekaApplication` 2.`ProducerApplication` 3.`ConsumerApplication`。访问`localhost:8080`:
+
+![](doc/9.png)
+
+可以看到`Eureka Server`控制台界面，其中有注册（registered）了两个实例（Instances），分别是`spring-cloud-producer`和`spring-cloud-consumer`。
+
+**注**
+
+* 目前配置注册到Eureka实例的`Status`栏显示的是当前系统用户名，这可以理解为等同于127.0.0.1、localhost地址
+* 目前配置Eureka Server实例`ipAddr`栏显示的当前系统网络网卡IP地址
 
 ## Eureka服务注册采用主机名还是IP地址？
 
@@ -199,8 +506,67 @@ eureka:
 
 ![](doc/7.png)
 
+# Eureka集群
 
+当业务需要多个注册中心完成整个系统的服务调用，可以搭建Eureka Server集群。这里我们再创建一个Modules：`spring-cloud-eureka2`，和`spring-cloud-eureka`模块配置相同，但同时修改两者的配置文件：
 
+> spring-cloud-eureka
 
+```yaml
+server:
+  port: 8080
+spring:
+  application:
+    # 应用名称
+    name: eureka-server
+eureka:
+  client:
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka
+```
 
+即这个`defaultZone`指向另外一个`Eureka Server`地址，并且删除掉`register-with-eureka`和`fetch-registry`配置，因为他们默认为true，并且需要注册到`Eureka Server`，相互注册，相互发现。
+
+> spring-cloud-eureka2
+
+```yaml
+server:
+  port: 8081
+spring:
+  application:
+    # 应用名称
+    name: eureka-server
+eureka:
+  client:
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka
+```
+
+> 修改`spring-cloud-producer`和`spring-cloud-consumer`使用这个Eureka集群
+
+修改两者的配置文件，将`defaultZone`修改为两个Eureka Server集群的地址，中间用逗号隔开
+
+```yaml
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/,http://127.0.0.1:8081/eureka/
+```
+
+![](doc/10.png)
+
+## 服务续约
+
+仔细观察Eureka Server服务控制台打印日志，发现每隔1分钟，注册进Eureka Server的服务都会向Eureka Server请求一次，以维持会话状态。
+
+![](doc/11.png)
+
+> 修改服务续约、和服务时效时间
+
+```yaml
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10 # 每隔10秒过期
+    lease-renewal-interval-in-seconds: 30 # 5秒一次请求
+```
 
