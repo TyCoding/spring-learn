@@ -8,4 +8,7 @@ eureka:
   client:
     # Eureka Server地址
     service-url:
-      defaultZone: http://127.0.0.1:8081/eureka
+      # defaultZone: http://127.0.0.1:8081/eureka
+      defaultZone: http://127.0.0.1:8080/eureka
+    register-with-eureka: false # 是否将自己注册到Eureka Server
+    fetch-registry: false # 是否拉取其他Server信息

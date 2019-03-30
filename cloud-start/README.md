@@ -306,6 +306,33 @@ eureka:
 * 目前配置注册到Eureka实例的`Status`栏显示的是当前系统用户名，这可以理解为等同于127.0.0.1、localhost地址
 * 目前配置Eureka Server实例`ipAddr`栏显示的当前系统网络网卡IP地址
 
+浏览器访问`localhost:9001/consumer/tycoding`，正确显示producer返回的数据：
+
+![](doc/12.png)
+
+## 服务续约
+
+### 服务提供方
+
+Eureka默认的服务续约时间为30秒，服务时效时间为90秒。若需要修改：
+
+```yaml
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10 # 服务时效时间
+    lease-renewal-interval-in-seconds: 5 # 服务续约时间（心跳时间）
+```
+
+### 服务消费方
+
+当服务启动后，服务消费方需要拉取服务列表，默认是30秒重新拉取一次数据，可以修改:
+
+```yaml
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+```
+
 ## Eureka服务注册采用主机名还是IP地址？
 
 ### 引入
