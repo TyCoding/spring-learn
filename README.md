@@ -54,4 +54,6 @@
 
 * [cloud-start](https://github.com/TyCoding/spring-learn/tree/master/cloud-start): 初识Spring Cloud
 
+* [cloud-hystrix](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix): 初识Spring Hystrix
+
 * 正在完善...
