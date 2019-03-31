@@ -1,0 +1,17 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: spring-cloud-producer
+
+eureka:
+  client:
+    # EurekaServer地址
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: 127.0.0.1:${server.port}
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5

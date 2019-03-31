@@ -1,0 +1,19 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: spring-cloud-consumer
+
+eureka:
+  client:
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: 127.0.0.1:${server.port}
+
+feign:
+  hystrix:
+    enabled: true
