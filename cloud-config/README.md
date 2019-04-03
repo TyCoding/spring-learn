@@ -122,5 +122,85 @@ spring:
           password:       # git仓库的密码
 ```
 
+## Client 端
+
+> 引入依赖
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-config</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-config-client</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+> 修改配置文件`application.yml`
+
+```yaml
+server:
+  port: 8081
+spring:
+  application:
+    name: spring-cloud-config-client
+  profiles:
+    active: native
+  # 配置中心
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/
+```
+
+新建配置文件：`bootstrap.yml`:
+
+```yaml
+spring:
+  cloud:
+    config:
+      name: config
+      profile: dev
+      uri: http://localhost:8080/
+      label: master
+```
+
+> 模拟创建一个控制器类
+
+```java
+@RestController
+public class HelloController {
+
+    @Value("${config.hello}")
+    private String hello;
+
+    @GetMapping("/hello")
+    public String hello() {
+        return this.hello;
+    }
+}
+```
+
+> 测试
+
+访问`localhost:8081/hello`即可。
+
+在Config Client端，并不需要再控制器类上添加任何注解，会自动注册此服务。在模拟演示的Controller中，`${config.hello}`得到的就是Config Server中储存的配置文件数据
+
+
 
 

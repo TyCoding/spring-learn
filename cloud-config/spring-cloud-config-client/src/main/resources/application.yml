@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: pig-config
+    name: spring-cloud-config-client
   profiles:
     active: native
   # 配置中心

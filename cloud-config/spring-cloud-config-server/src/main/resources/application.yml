@@ -5,17 +5,17 @@ spring:
   application:
     name: spring-cloud-config-server
   # 本地储存配置
-#  profiles:
-#    active: native
+  profiles:
+    active: native
   cloud:
     config:
       server:
         # 本地储存配置
-#        native:
-#          search-locations: classpath:config/
+        native:
+          search-locations: classpath:config/
         # git储存配置
-        git:
-          uri: https://github.com/TyCoding/spring-learn
-          search-paths:
-          username:
-          password:
+#        git:
+#          uri:
+#          search-paths:
+#          username:
+#          password:
