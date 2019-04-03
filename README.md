@@ -54,11 +54,13 @@
 
 * [cloud-start](https://github.com/TyCoding/spring-learn/tree/master/cloud-start): 初识Spring Cloud
 
-* [cloud-hystrix](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix): 初识Spring Hystrix
+* [cloud-hystrix](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix): 初识Spring Cloud Hystrix
 
-* [cloud-hystrix-dashboard](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix-dashboard): 初识 Hystrix Dashboard
+* [cloud-hystrix-dashboard](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix-dashboard): 初识Spring Cloud Hystrix Dashboard
 
-* [cloud-zuul](https://github.com/TyCoding/spring-learn/tree/master/cloud-zuul): 初识Spring Zuul
+* [cloud-zuul](https://github.com/TyCoding/spring-learn/tree/master/cloud-zuul): 初识Spring Cloud Zuul
+
+* [cloud-config](https://github.com/TyCoding/spring-learn/tree/master/cloud-config): 初识Spring Cloud Config
 
 
 * 正在完善...
