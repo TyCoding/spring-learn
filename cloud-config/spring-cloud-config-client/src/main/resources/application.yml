@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: pig-config
+  profiles:
+    active: native
+  # 配置中心
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/
