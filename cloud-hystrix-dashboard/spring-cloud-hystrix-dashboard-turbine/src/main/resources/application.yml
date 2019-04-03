@@ -1,0 +1,20 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: dashboard-turbine
+
+turbine:
+  app-config: consumer,consumer2
+  aggregator:
+    cluster-config: default
+  cluster-name-expression: new String("default")
+
+feign:
+  hystrix:
+    enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/

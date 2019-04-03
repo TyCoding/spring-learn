@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    # 应用名称
+    name: eureka-server
+eureka:
+  client:
+    # Eureka Server地址
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka
+    register-with-eureka: false # 是否将自己注册到Eureka Server
+    fetch-registry: false # 是否拉取其他Server信息
