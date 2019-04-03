@@ -56,6 +56,9 @@
 
 * [cloud-hystrix](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix): 初识Spring Hystrix
 
+* [cloud-hystrix-dashboard](https://github.com/TyCoding/spring-learn/tree/master/cloud-hystrix-dashboard): 初识 Hystrix Dashboard
+
 * [cloud-zuul](https://github.com/TyCoding/spring-learn/tree/master/cloud-zuul): 初识Spring Zuul
+
 
 * 正在完善...
