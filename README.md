@@ -48,6 +48,8 @@
 
 * [boot-elasticsearch](https://github.com/TyCoding/spring-learn/tree/master/boot-elasticsearch): Spring Boot整合Spring-data-elasticsearch，实现对elasticsearch的，添加、查询功能
 
+* [boot-security](https://github.com/TyCoding/spring-learn/tree/master/boot-security): Spring Boot整合Spring Security，实现登录校验、验证码登录
+
 * 正在完善...
 
 ### Spring Cloud系列
