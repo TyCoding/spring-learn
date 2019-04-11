@@ -1,0 +1,16 @@
+spring:
+  # thymeleaf 模板引擎
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    cache: false
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/springboot_security?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
