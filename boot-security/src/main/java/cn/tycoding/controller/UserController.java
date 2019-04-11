@@ -17,7 +17,7 @@ public class UserController {
     @GetMapping("/test")
     @ResponseBody
     public String test() {
-        return "Hello I'm TyCoding, this is Login test";
+        return "Hello I'm TyCoding, this is test interface";
     }
 
     /**
