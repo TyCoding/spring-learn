@@ -22,9 +22,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    private RedisConnectionFactory redisConnectionFactory;
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory().withClient("client_1")
@@ -44,7 +41,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-//                .tokenStore(new RedisTokenStore(redisConnectionFactory))
                 .authenticationManager(authenticationManager);
     }
 
