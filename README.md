@@ -50,6 +50,8 @@
 
 * [boot-security](https://github.com/TyCoding/spring-learn/tree/master/boot-security): Spring Boot整合Spring Security，实现登录校验、验证码登录
 
+* [boot-security-oauth2](https://github.com/TyCoding/spring-learn/tree/master/boot-security-oauth2): Spring Boot整合Spring Security OAuth2
+
 * 正在完善...
 
 ### Spring Cloud系列
