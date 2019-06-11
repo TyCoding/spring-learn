@@ -43,7 +43,7 @@
 
 ## 文档
 
-* **[Mybatis通用Mapper(tk.mapper)使用案例](https://github.com/TyCoding/spring-boot-learn/tree/master/spring-boot-thymeleaf-mybatis/doc/Mapper.md)**
+* **[Mybatis通用Mapper(tk.mapper)使用案例](https://github.com/TyCoding/spring-learn/blob/master/boot-thymeleaf-mybatis/doc/Mapper.md)**
 
 **截图**
 
