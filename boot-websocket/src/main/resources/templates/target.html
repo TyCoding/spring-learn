@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iframe</title>
+</head>
+<body>
+
+<button onclick="connectChat()">链接WebSocket</button>
+<button onclick="closeChat()">关闭链接</button>
+
+<br/>
+
+<input id="text" type="text">
+
+<button onclick="send()">发送消息</button>
+
+<div id="message"></div>
+
+<script>
+    var websocket = null;
+
+    /**
+     * 链接WebSocket
+     */
+    function connectChat() {
+        console.log(">> 链接WebSocket")
+        websocket = new WebSocket('ws://localhost:8080/chat/' + (new Date()).getTime())
+
+        /**
+         * Websocket链接错误时调用
+         */
+        websocket.onerror = function() {
+            writeHTML('Websocket链接发生错误')
+        }
+
+        /**
+         * Websocket链接成功时调用
+         */
+        websocket.onopen = function() {
+            writeHTML('Websocket链接成功')
+        }
+
+        /**
+         * 接收到消息的回调方法
+         */
+        websocket.onmessage = function(event) {
+            console.log(event)
+            writeHTML(event.data)
+        }
+
+        /**
+         * 链接关闭时的回调方法
+         */
+        websocket.onclose = function() {
+            writeHTML('Websocket链接关闭')
+        }
+    }
+
+    /**
+     * 关闭WebSock链接
+     */
+    function closeChat() {
+        websocket.close()
+    }
+
+    /**
+     * 将消息写到HTML标签上
+     * @param message
+     */
+    function writeHTML(message) {
+        document.getElementById("message").innerHTML += message + '<br/>'
+    }
+
+    /**
+     * 发送消息
+     */
+    function send() {
+        var message = document.getElementById('text').value
+        websocket.send(message);
+    }
+</script>
+
+</body>
+</html>

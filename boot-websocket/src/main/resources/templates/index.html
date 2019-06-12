@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+</head>
+<body>
+
+<div style="float: left;">
+    <iframe src="/chat/target" height="250" width="100%"></iframe>
+    <iframe src="/chat/target" height="250" width="100%"></iframe>
+    <iframe src="/chat/target" height="250" width="100%"></iframe>
+</div>
+
+<div style="float: right;width: 30%;">
+    <label>给指定窗口发送消息 >></label>
+    <br/>
+    <input id="id" type="text" placeholder="窗口ID">
+    <br/>
+    <textarea id="content" style="width: 350px;height: 85px;" placeholder="消息内容"></textarea>
+    <br/>
+    <button onclick="send()">发送消息</button>
+    <br/>
+    <div id="message"></div>
+</div>
+
+</body>
+<script>
+    function send() {
+        let id = document.getElementById('id').value
+        let content = document.getElementById('content').value
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('get', 'http://localhost:8080/chat/push/' + id + '/' + content, true)
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+        xhr.send()
+        xhr.onreadystatechange = function() {
+            if (xhr.status == 200) {
+                console.log(xhr.responseText)
+                document.getElementById('message').innerText = xhr.responseText
+            }
+        }
+    }
+</script>
+</html>
