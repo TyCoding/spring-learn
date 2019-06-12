@@ -52,6 +52,8 @@
 
 * [boot-security-oauth2](https://github.com/TyCoding/spring-learn/tree/master/boot-security-oauth2): Spring Boot整合Spring Security OAuth2
 
+* [boot-websocket](https://github.com/TyCoding/spring-learn/tree/master/boot-websocket): Spring Boot整合WebSocket实现简单的在线聊天
+
 * 正在完善...
 
 ### Spring Cloud系列
