@@ -1,0 +1,20 @@
+spring:
+  application:
+    # 服务名称
+    name: nacos-provider
+  cloud:
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+# 服务端口
+server:
+  port: 8081
+
+# 监听端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
