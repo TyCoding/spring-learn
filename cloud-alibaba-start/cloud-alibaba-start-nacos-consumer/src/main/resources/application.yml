@@ -13,7 +13,7 @@ spring:
         # 任意指定一个端口供dashboard监听（此应用作为一个服务端提供接口）
         port: 8101
         # sentinel dashboard启动的端口
-        dashboard: 127.0.0.1:8080
+        dashboard: 127.0.0.1:8100
 
 feign:
   # 开启Feign对sentinel的支持

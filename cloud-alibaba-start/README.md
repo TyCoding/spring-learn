@@ -59,6 +59,7 @@
 | ElasticSearch | 6.8.1    |
 | Skywalking    | 8.0.1    |
 | RockMQ        | 4.5.2    |
+| Sentinel      | 1.7.0    |
 
 
 

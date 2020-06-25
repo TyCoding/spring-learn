@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- * 对方提供服务访问接口
+ * Feign访问接口
  *
  * @author tycoding
  * @date 2020/6/22
