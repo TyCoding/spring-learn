@@ -165,6 +165,52 @@ Application profile commands:
  app default ARG                 set default application policy
 ```
 
+> Ubuntu18设置 `ufw`防火墙允许ssh连接
+
+当你在本地用`ssh user@ip`连接虚拟机一直连接不上时，可能是虚拟机没有防火墙没有开放`22`端口：
+
+![image-20200625092920308](http://cdn.tycoding.cn/20200625092926.png)
+
+你可以尝试关闭`ufw`防火墙，或开放`22`端口：
+
+![image-20200625093046745](http://cdn.tycoding.cn/20200625093046.png)
+
+这两种方式都可以让你正常用ssh连接。
+
+> 允许ssh使用root账户登录
+
+在安装Ubuntu虚拟机时，一般要求我们设置登录账户和密码，但用户名却不允许设置为`root`，因为Ubuntu内置了`root`账户，且密码你随机的。
+
+1. 重置`root`账户密码为`root`：
+
+```shell
+sudo passwd root
+```
+
+![image-20200625093506683](http://cdn.tycoding.cn/20200625093506.png)
+
+2. 编辑`/etc/ssh/ssh_config`文件，允许`root`账户登录
+
+```ssh
+sudo vi /etc/ssh/ssh_config
+```
+
+将`PermitRootLogin prohibit-password`修改为`PermitRootLogin yes`
+
+![image-20200625093750132](http://cdn.tycoding.cn/20200625093750.png)
+
+重启`ssh`服务：
+
+```shell
+sudo systemctl restart sshd
+```
+
+那么就能使用`ssh root@ip`账户登录了:
+
+![image-20200625093905847](http://cdn.tycoding.cn/20200625093905.png)
+
+
+
 
 
 ## Tips

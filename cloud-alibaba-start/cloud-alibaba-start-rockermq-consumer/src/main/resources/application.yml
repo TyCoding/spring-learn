@@ -1,0 +1,17 @@
+spring:
+  application:
+    # 服务名称
+    name: rocketmq-consumer
+  cloud:
+    stream:
+      bindings:
+        # 这里是个 Map 类型参数，{} 为 YAML 中 Map 的行内写法
+        input: {destination: test-topic, content-type: application/json, group: test-group}
+      rocketmq:
+        binder:
+          name-server: 172.16.60.129:9876
+
+
+# 服务端口
+server:
+  port: 8084

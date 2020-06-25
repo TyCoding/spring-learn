@@ -116,7 +116,7 @@ selector: elasticsearch
 
 此过程最重要的是修改`application.yml`文件，而主要修改`storage`节点的前三行参数。
 
-- `selector`：选择的存储方案。（很多教程中直接就是说注释下面的`h2`配置就行了，但实际中仅注释并没指定`elasticsearch`存储方案。不如主动选择`elasticsearch`，也不必再注释`h2`节点了）
+- `selector`：选择的存储方案。（很多教程中直接就是说注释下面的`h2`配置就行了（可能是老版本），但实际中仅注释并没指定`elasticsearch`存储方案。不如主动选择`elasticsearch`，也不必再注释`h2`节点了）
 - `nameSpace`： Elasticsearch容器的名称，可以通过`docker container ls`查看，或者查看`docker-compose.yml`配置文件
 - `clusterNodes`：指定Elasticsearch服务访问的IP地址，本地就是localhost，远程就是远程IP，端口默认9200
 
