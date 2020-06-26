@@ -18,6 +18,8 @@ public class ConfigController {
 
     @GetMapping("/config")
     public String config() {
-        return applicationContext.getEnvironment().getProperty("config.author");
+        return applicationContext.getEnvironment().getProperty("server.port")
+                + "， author: "
+                + applicationContext.getEnvironment().getProperty("author");
     }
 }
