@@ -11,7 +11,7 @@
     </select>
 
     <insert id="save" parameterType="cn.tycoding.entity.User">
-        insert into user(username,password,create_time) values(#{username},#{password},#{createTime}
+        insert into user(username,password,create_time) values (#{username},#{password},#{createTime})
     </insert>
 
     <update id="update" parameterType="cn.tycoding.entity.User">
